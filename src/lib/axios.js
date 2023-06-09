@@ -1,4 +1,4 @@
-import { axiosInstanse } from "../Config/axiosEnstanse";
+import { axiosInstanse } from "./axiosEnstanse";
 
 export const getAllFoodsRequest = () => {
   return axiosInstanse.get("/foods");
@@ -28,4 +28,12 @@ export const minusBasketFoodsRequest = (data) => {
 
 export const deleteBasketFoodsRequest = (id) => {
   return axiosInstanse.delete(`/basketItem/${id}/delete`);
+};
+
+export const signInRequest = (data) => {
+  return axiosInstanse.post("/auth/login", data);
+};
+
+export const signUpRequest = (data) => {
+  return axiosInstanse.post("/auth/register", data);
 };

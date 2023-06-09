@@ -19,6 +19,7 @@ export const Basket = ({ setOpen }) => {
     (prev, current) => prev + +current.price.toFixed(2) * current.amount,
     0
   );
+  
 
   useEffect(() => {
     dispatch(getBasketFoods());
@@ -109,7 +110,7 @@ const Container = styled("div")`
   backdrop-filter: blur(2px);
 `;
 const Backdrop = styled("div")`
-  margin: 280px auto;
+  margin: 100px auto;
   background-color: #fff;
   width: 671px;
   /* height: 437px; */

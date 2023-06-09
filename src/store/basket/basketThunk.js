@@ -11,7 +11,8 @@ export const getBasketFoods = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = getBasketFoodsRequest();
-      return data;
+      console.log(data);
+      return data
     } catch (error) {
       return rejectWithValue(error.message);
     }
