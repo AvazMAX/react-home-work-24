@@ -1,5 +1,7 @@
 import { axiosInstanse } from "./axiosEnstanse";
 
+//meals && basket
+
 export const getAllFoodsRequest = () => {
   return axiosInstanse.get("/foods");
 };
@@ -30,10 +32,26 @@ export const deleteBasketFoodsRequest = (id) => {
   return axiosInstanse.delete(`/basketItem/${id}/delete`);
 };
 
+//sign
+
 export const signInRequest = (data) => {
   return axiosInstanse.post("/auth/login", data);
 };
 
 export const signUpRequest = (data) => {
   return axiosInstanse.post("/auth/register", data);
+};
+
+//admin
+
+export const postNewFoodsAdminRequest = (data) => {
+  return axiosInstanse.post("/foods", data);
+};
+
+export const deleteAdminFoodsRequest = (data) => {
+  return axiosInstanse.delete(`/foods/${data._id}`);
+};
+
+export const editAdminFoodsRequest = (data) => {
+  return axiosInstanse.put(`/foods/${data._id}`, data );
 };

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteBasketFoods,
+  getBasket,
   getBasketFoods,
   minusBasketFoods,
   plusBasketFoods,
@@ -10,20 +11,18 @@ import {
 import { BasketItem } from "./BasketItem";
 import { MyButton } from "../../UI/Button";
 
-export const Basket = ({ setOpen }) => {
+export const Basket = ({ closeModal }) => {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.items);
-  const db = items?.data?.data?.items;
 
-  const totalPrice = db?.reduce(
+  const totalPrice = items?.reduce(
     (prev, current) => prev + +current.price.toFixed(2) * current.amount,
     0
   );
-  
 
   useEffect(() => {
-    dispatch(getBasketFoods());
-  }, [dispatch]);
+    dispatch(getBasket());
+  }, []);
 
   const btnPlus = (el) => {
     dispatch(plusBasketFoods(el));
@@ -39,11 +38,18 @@ export const Basket = ({ setOpen }) => {
   return (
     <Container>
       <Backdrop>
-        <ContainerItem>
-          {db?.map((el, i) => {
-            return <BasketItem el={el} btnPlus={btnPlus} btnMinus={btnMinus} />;
-          })}
-        </ContainerItem>
+        {items?.length ? (
+          <ContainerItem>
+            {items?.map((el, i) => (
+              <BasketItem
+                el={el}
+                key={i}
+                btnPlus={btnPlus}
+                btnMinus={btnMinus}
+              />
+            ))}
+          </ContainerItem>
+        ) : null}
         <div>
           <ContainerTotalAmount>
             <h1>Total amount: </h1>
@@ -53,7 +59,7 @@ export const Basket = ({ setOpen }) => {
             {totalPrice > 0 ? (
               <>
                 <MyButton
-                  onClick={() => setOpen(false)}
+                  onClick={closeModal}
                   variant={"outlined"}
                   propswidth={"110px"}
                   propsheight={"44px"}
@@ -79,7 +85,7 @@ export const Basket = ({ setOpen }) => {
               </>
             ) : (
               <MyButton
-                onClick={() => setOpen(false)}
+                onClick={closeModal}
                 variant={"outlined"}
                 propswidth={"110px"}
                 propsheight={"44px"}
@@ -110,15 +116,14 @@ const Container = styled("div")`
   backdrop-filter: blur(2px);
 `;
 const Backdrop = styled("div")`
-  margin: 100px auto;
+  margin: 230px auto;
   background-color: #fff;
   width: 671px;
-  /* height: 437px; */
   padding: 32px;
   border-radius: 20px;
 `;
 const ContainerItem = styled("div")`
-  height: 300px;
+  height: 260px;
   overflow-y: auto;
 `;
 const ContainerTotalAmount = styled("div")`

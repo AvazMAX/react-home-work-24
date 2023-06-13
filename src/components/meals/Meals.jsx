@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFoods, postFoods } from "../../store/meals/MealsThunk";
 import { MealsItem } from "./MealsItem";
-import { getBasketFoods } from "../../store/basket/basketThunk";
 import styled from "@emotion/styled";
+import { getBasket } from "../../store/basket/basketThunk";
 
 export const Meals = () => {
   const dispatch = useDispatch();
@@ -12,20 +12,20 @@ export const Meals = () => {
 
   useEffect(() => {
     dispatch(getFoods());
-    dispatch(getBasketFoods());
-  }, [dispatch]);
+    dispatch(getBasket());
+  }, []);
 
   return (
     <Container>
       {meals?.map((el, i) => (
-        <div key={i}>
+        <main key={i}>
           <MealsItem
             el={el}
             dispatch={dispatch}
             amountChange={amountChange}
             setAmountChange={setAmountChange}
           />
-        </div>
+        </main>
       ))}
     </Container>
   );
@@ -35,4 +35,10 @@ const Container = styled("div")`
   margin: 135px 20%;
   padding: 40px;
   border-radius: 16px;
+  main {
+      border-bottom: 1px solid #d6d6d6;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
 `;

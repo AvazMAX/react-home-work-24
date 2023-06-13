@@ -2,16 +2,21 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { MyButton } from "../../UI/Button";
 import { postFoods } from "../../store/meals/MealsThunk";
+import { plusBasketFoods } from "../../store/basket/basketThunk";
 
 export const MealsItem = ({ el, dispatch }) => {
   const [number, setNumber] = useState(1);
 
   const addFoods = () => {
-    const data = {
-      ...el,
-      amount: +number,
-    };
-    dispatch(postFoods(data));
+    if (el.amount === 0) {
+      dispatch(plusBasketFoods());
+    } else {
+      const data = {
+        ...el,
+        amount: +number,
+      };
+      dispatch(postFoods(data));
+    }
     setNumber(1);
   };
 
@@ -50,10 +55,6 @@ const Container = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #d6d6d6;
-  /* &:last-child {
-    border-bottom: none;
-  } */
 `;
 const ContainerItem = styled("div")`
   margin: 24px 0;

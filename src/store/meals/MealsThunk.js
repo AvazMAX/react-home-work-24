@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getAllFoodsRequest, postNewFoodsRequest } from "../../lib/axios";
-import { getBasketFoods } from "../basket/basketThunk";
+import { getBasket, getBasketFoods } from "../basket/basketThunk";
 
 export const getFoods = createAsyncThunk(
   "foods/foods",
@@ -15,11 +15,12 @@ export const getFoods = createAsyncThunk(
 );
 
 export const postFoods = createAsyncThunk(
-  "basket/addToBasket",
+  "basket/addItem",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      await postNewFoodsRequest(data);
-      return dispatch(getBasketFoods());
+      const response = await postNewFoodsRequest(data);
+      dispatch(getBasket());
+      return response.items;
     } catch (error) {
       return rejectWithValue(error.message);
     }

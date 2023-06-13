@@ -39,7 +39,6 @@ const StyleButton = styled(Button)(
   ({
     variant,
     defaultcolor,
-    fontsize,
     hoverbackgroundcolor,
     activebackgroundcolor,
     disabledcolor,
@@ -56,7 +55,6 @@ const StyleButton = styled(Button)(
         return {
           width: `${propswidth}`,
           height: `${propsheight}`,
-          fontsize: `${fontsize}`,
           backgroundColor: `${background}`,
           color: `${defaultcolor}`,
           gap: "10px",
@@ -80,7 +78,6 @@ const StyleButton = styled(Button)(
           gap: "10px",
           padding: "10px 26px",
           backgroundColor: "none",
-          fontsize: `${fontsize}`,
           border,
           borderColor: `${outlinedbordercolor}`,
           color: `${defaultcolor}`,
@@ -107,7 +104,6 @@ const StyleButton = styled(Button)(
           height: `${propsheight}`,
           backgroundColor: "none",
           color: `${defaultcolor}`,
-          fontSize: `${fontsize}`,
         };
     }
   }

@@ -26,7 +26,6 @@ export const BasketItem = ({ el, btnMinus, btnPlus }) => {
             outlinedhoverandactivetextcolor={"#fff"}
             defaultcolor={"#8A2B06"}
             hoverbackgroundcolor={"#8A2B06"}
-            fontsize={'25px'}
           >
             -
           </MyButton>
@@ -51,7 +50,6 @@ export const BasketItem = ({ el, btnMinus, btnPlus }) => {
 };
 const Container = styled("div")`
   border-bottom: 1px solid #d6d6d6;
-  /* margin-top: 40px; */
   div {
     h2 {
       margin-top: 24px;
@@ -76,7 +74,6 @@ const ContainerAmoPri = styled("div")`
       color: #ad5502;
     }
     button {
-      /* width: 46px; */
       padding: 6px;
       height: 36px;
       border: 1px solid #d6d6d6;

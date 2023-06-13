@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { signIn } from "../store/auth/authThunk";
 
 export const SignIn = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -71,6 +71,7 @@ const Container = styled("div")`
     gap: 20px;
     input {
       width: 100%;
+      text-align: center;
     }
   }
   button {

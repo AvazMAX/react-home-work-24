@@ -6,13 +6,13 @@ import {
   plusBasketFoodsRequest,
 } from "../../lib/axios";
 
-export const getBasketFoods = createAsyncThunk(
-  "/basket",
+export const getBasket = createAsyncThunk(
+  "items/getBasket",
   async (_, { rejectWithValue }) => {
     try {
-      const data = getBasketFoodsRequest();
+      const data = await getBasketFoodsRequest();
       console.log(data);
-      return data
+      return data.data.data.items;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -20,11 +20,11 @@ export const getBasketFoods = createAsyncThunk(
 );
 
 export const plusBasketFoods = createAsyncThunk(
-  "/basketItem/plus",
+  "items/plus",
   async (el, { rejectWithValue, dispatch }) => {
     try {
       plusBasketFoodsRequest(el);
-      return dispatch(getBasketFoods());
+      return dispatch(getBasket());
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -32,11 +32,11 @@ export const plusBasketFoods = createAsyncThunk(
 );
 
 export const minusBasketFoods = createAsyncThunk(
-  "/basketItem/minus",
+  "items/minus",
   async (el, { rejectWithValue, dispatch }) => {
     try {
       minusBasketFoodsRequest(el);
-      return dispatch(getBasketFoods());
+      return dispatch(getBasket());
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -44,11 +44,11 @@ export const minusBasketFoods = createAsyncThunk(
 );
 
 export const deleteBasketFoods = createAsyncThunk(
-  "/basketItem/delete",
+  "items/delete",
   async (id, { rejectWithValue, dispatch }) => {
     try {
       deleteBasketFoodsRequest(id);
-      return dispatch(getBasketFoods());
+      return dispatch(getBasket());
     } catch (error) {
       return rejectWithValue(error.message);
     }

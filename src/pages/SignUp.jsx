@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/auth/authThunk";
+import { USERS_ROLE } from "../constants";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -16,14 +17,18 @@ export const SignUp = () => {
 
   const dispatch = useDispatch();
 
-  const addNewUser = () => {
+  const addNewUser = (e) => {
+    e.preventDefault()
     const data = {
       name,
       email,
       password,
-      role: "USER",
+      role: USERS_ROLE.ADMIN,
     };
-    dispatch(signUp(data));
+    dispatch(signUp(data))
+      .unwrap()
+      .then(() => navigate("/"))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -85,6 +90,7 @@ const Container = styled("div")`
     gap: 10px;
     input {
       width: 100%;
+      text-align: center;
     }
   }
   button {
